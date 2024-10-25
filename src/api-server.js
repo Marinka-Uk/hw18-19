@@ -1,11 +1,13 @@
 const BASE_URL ='localhost:3000'
 
-function fetchStudents (){
-   return fetch(`http://${BASE_URL}/students`)
-    .then( res => res.json())
+async function fetchStudents (){
+const response = await fetch(`http://${BASE_URL}/students`)
+const parsedStudents = await response.json()
+return parsedStudents
+    
 }
 
-function addStudent(newStudent){
+async function addStudent(newStudent){
   const options = {
         method:  "POST",
         body:  JSON.stringify(newStudent),
@@ -13,29 +15,36 @@ function addStudent(newStudent){
             "Content_Type": "application/json;  charset=UTF-8",
         },
     }
-    return fetch(`http://${BASE_URL}/students`, options)
-    .then(res => res.json())
+  const responseStudent = await fetch(`http://${BASE_URL}/students`, options)
+const addedStudent = await responseStudent.json()
+return addStudent
+
 }
 
-export function deleteStudent(id){
+export async function deleteStudent(id){
     const options = {
         method:  "DELETE",
         headers: {
             "Content_Type": "application/json;  charset=UTF-8",
         },
     }
-    return fetch(`http://${BASE_URL}/students${id}`, options)
-    .then(res => res.json())
+  
+    const result = await fetch(`http://${BASE_URL}/students${id}`, options)
+const deletedStudent = await result.json()
+return deletedStudent
+
 }
 
-export function updateStudent(id, valueToUpdate){
+export async function updateStudent(id, valueToUpdate){
     const options = {
         method:  "PATCH",
         body:  JSON.stringify(valueToUpdate),
         headers: {
             "Content_Type": "application/json;  charset=UTF-8",
         },
+
     }
-    return fetch(`http://${BASE_URL}/students${id}`, options)
-    .then(res => res.json())
+const result = await fetch(`http://${BASE_URL}/students${id}`, options)
+const studentParce =  await result.json()
+return studentParce
 }
