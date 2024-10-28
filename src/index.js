@@ -6,12 +6,11 @@ import {updateStudent} from './api-server.js'
 
 const НТТР = 'http://localhost:3000/students';
 const list = document.querySelector('.student-list')
-const btnStudent  = document.querySelector('.student-btn')
+const btnStudent  = document.querySelector('.getStudentsBtn')
 const form = document.querySelector('form')
 
-getstudentsBtn.addEventListener('click', onGetStudentsBtn)
-form.addEventListener('submit', onSubmit)
 
+form.addEventListener('submit', onSubmit)
 
 btnStudent.addEventListener('click',()=>{
     getStudent()
@@ -51,6 +50,13 @@ function onSubmit(e){
     isEnrolled:  formEl.isEnrolled.checked
   }
 
+addStudent(newStudent)
+.then (response => 
+  console.log("Студента додано")
+)
 
     e.currentTarget.reset()
 }
+
+
+
