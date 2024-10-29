@@ -1,13 +1,13 @@
 const BASE_URL ='localhost:3000'
 
-async function fetchStudents (){
+export async function fetchStudents (){
 const response = await fetch(`http://${BASE_URL}/students`)
 const parsedStudents = await response.json()
 return parsedStudents
     
 }
 
-async function addStudent(newStudent){
+export async function addStudent(newStudent){
   const options = {
         method:  "POST",
         body:  JSON.stringify(newStudent),

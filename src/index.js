@@ -11,13 +11,39 @@ const form = document.querySelector('form')
 
 
 form.addEventListener('submit', onSubmit)
+btnStudent.addEventListener('click', onClick)
 
-btnStudent.addEventListener('click',()=>{
-    getStudent()
-    .then(allStudents => {const addStudent = studentList(addStudent)
-        list.insertAdjacentHTML('beforeend', addStudent)
-    })
-} )
+function onClick(){
+  fetchStudents()
+  .then(allStudents =>{
+      const addStudent = studentList(allStudents)
+      list.insertAdjacentHTML('beforeend', addStudent)
+  })
+}
+
+
+
+function onSubmit(e){
+  e.preventDefault()
+const formEl  = e.currentTarget.elements
+
+const newStudent = {
+  name: formEl.name.value,
+  age: formEl.age.value,
+  course: formEl.course.value,
+  skills: [formEl.skills.value],
+  email:  formEl.email.value,
+  isEnrolled:  formEl.isEnrolled.checked
+}
+
+addStudent(newStudent)
+.then (response => 
+console.log("Студента додано")
+)
+
+  e.currentTarget.reset()
+}
+
 
 
 function studentList(addList){
@@ -37,26 +63,6 @@ function studentList(addList){
     })
 }
 
-function onSubmit(e){
-    e.preventDefault()
-  const formEl  = e.currentTarget.elements
-
-  const newStudent = {
-    name: formEl.name.value,
-    age: formEl.age.value,
-    course: formEl.course.value,
-    skills: [formEl.skills.value],
-    email:  formEl.email.value,
-    isEnrolled:  formEl.isEnrolled.checked
-  }
-
-addStudent(newStudent)
-.then (response => 
-  console.log("Студента додано")
-)
-
-    e.currentTarget.reset()
-}
 
 
 
