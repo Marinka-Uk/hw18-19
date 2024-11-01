@@ -29,7 +29,7 @@ export async function deleteStudent(id){
         },
     }
   
-    const result = await fetch(`http://${BASE_URL}/students${id}`, options)
+    const result = await fetch(`http://${BASE_URL}/students/${id}`, options)
 const deletedStudent = await result.json()
 return deletedStudent
 
