@@ -1,3 +1,15 @@
 {
-  "students": []
+  "students": [
+    {
+      "id": "8c28",
+      "name": "",
+      "age": "",
+      "course": "",
+      "skills": [
+        ""
+      ],
+      "email": "",
+      "isEnrolled": false
+    }
+  ]
 }

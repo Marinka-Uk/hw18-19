@@ -9,6 +9,11 @@ const list = document.querySelector('.student-list')
 const btnStudent  = document.querySelector('.getStudentsBtn')
 const form = document.querySelector('form')
 
+const modal = document.getElementById("updateModal")
+const closeModal = document.querySelector(".close");
+const updateForm = document.getElementById("updateForm");
+
+let currentStudentId = null;  
 
 form.addEventListener('submit', onSubmit)
 btnStudent.addEventListener('click', onClick)
@@ -80,7 +85,7 @@ list.addEventListener('click', (e)=>{
 
 
 
-function updateStudent(event){
+function onUpdateStudent(event){
   const studentElement = event.target.closest('li');
   currentStudentId = studentElement.dataset.id;
 
@@ -109,7 +114,7 @@ closeModal.onclick = () => { modal.style.display = "none"; };
 updateForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
-  const onUpdatedStudent = {
+  const UpdatedStudent = {
       name: updateForm.name.value,
       age: updateForm.age.value,
       course: updateForm.course.value,
@@ -118,10 +123,16 @@ updateForm.addEventListener('submit', (event) => {
       isEnrolled: updateForm.isEnrolled.checked
   };
 
-  patchStudent(currentStudentId, onUpdatedStudent).then(() => {
+  patchStudent(currentStudentId, UpdatedStudent).then(() => {
       alert('Дані студента оновлено');
       modal.style.display = "none"; 
       btnStudent.click();
   });
-  updateStudent()
 });
+
+
+window.onclick = (event) => {
+  if (event.target == modal) {
+      modal.style.display = "none";
+  }
+}
